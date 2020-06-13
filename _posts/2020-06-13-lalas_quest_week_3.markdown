@@ -15,6 +15,6 @@ TODOs:
 - Item and Monster placement on the map should be more than just randomly trying to throw them in (not even caring if they are inside or outside the rooms).
 - Coming up with new mechanics for mutations (I have some ideas already).
 
-If anybody wants to follow my learning progress, the code is now available here: [](https://github.com/torlenor/asciiventure)
+If anybody wants to follow my learning progress, the code is now available here: [GitHub](https://github.com/torlenor/asciiventure)
 
 Please do not take that code as a guide how to do things, that's my first game and it is still a mess (but it's getting better!) ;)
