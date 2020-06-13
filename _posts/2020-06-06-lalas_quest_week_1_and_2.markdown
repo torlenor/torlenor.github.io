@@ -4,8 +4,6 @@ title:  "Lala's Quest Week 1 & 2"
 date:   2020-06-06 18:00:00 +0200
 categories: "Lala's quest"
 ---
-# Lala's Quest Week 1 & 2
-
 A roguelike exploration game featuring a little cat, monsters and mutations.
 
 Due to Corona I had more time than usual for my private projects. As I had no motivation to keep on coding on my other projects, I started a new one: A game! I stumbled across the topic of roguelikes again, which I did not play in a long time (except games like FTL). As my other tries to do something game-like was usually always messing around with graphics, 3d models and materials in Unreal Engine 4, I thought this time I will give pure ASCII a try as this would for sure be a lot less complex. Well, was I wrong! Over the last two weeks I discovered the topics of FoV calculations, pathfinding, procedural map generation, structuring of code for games, e.g., ECS, and many more things.
