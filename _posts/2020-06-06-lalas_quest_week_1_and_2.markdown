@@ -19,4 +19,5 @@ I am currently struggling with the core turn based game system and the entity ma
 I will open-source it when the code is a little less messy.
 
 Oh and here is a WIP gif:
+
 ![](https://i.imgur.com/6Kf9Yci.gif)

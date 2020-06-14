@@ -26,8 +26,8 @@
 
         <section>
             <div id="title">
-                <h1>{{ site.title | default: site.github.repository_name }}</h1>
-                <p>{{ site.description | default: site.github.project_tagline }}</p>
+                <h1><a class="page-link" href="{{ site.url | relative_url }}">{{ site.title | escape }}</a></h1>
+                <p>{{ site.description }}</p>
                 <hr>
             </div>
 
