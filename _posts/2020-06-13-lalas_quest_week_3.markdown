@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lala's Quest Week 3"
+title:  "Lala's Quest | Week 3"
 date:   2020-06-13 19:00:00 +0200
 categories: "Lala's quest"
 ---

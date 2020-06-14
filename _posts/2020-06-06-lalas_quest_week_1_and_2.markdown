@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lala's Quest Week 1 & 2"
+title:  "Lala's Quest | Week 1 & 2"
 date:   2020-06-06 18:00:00 +0200
 categories: "Lala's quest"
 ---
