@@ -35,7 +35,7 @@ plugins:
   - jekyll-feed
 
 show_downloads: false
-google_analytics:
+google_analytics: UA-62820693-2
 
 github:
   repository_url:
