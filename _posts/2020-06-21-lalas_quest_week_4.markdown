@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Lala's Quest | Week 4"
+title:  "Lili's Quest | Week 4"
 date:   2020-06-21 08:25:00 +0200
-categories: ["Lili's quest", "Lala's quest"]
+categories: "Lili's quest"
 ---
 During this week I worked on refactoring the input handling, to make it easier adding new keyboard shortcuts. This also has the advantage, that I can disentangle the SDL events from the actual input handling in the program. Later on I have to think about a system on how to have different input key bindings/behaviors depending on the state of the game (main menu, options menu, inventory modal open, for example), but this is something I have to think of when I actually have additional game states.
 

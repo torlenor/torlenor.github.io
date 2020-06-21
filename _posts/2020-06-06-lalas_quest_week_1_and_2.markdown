@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Lala's Quest | Week 1 & 2"
+title:  "Lili's Quest | Week 1 & 2"
 date:   2020-06-06 18:00:00 +0200
-categories: "Lala's quest"
+categories: "Lili's quest"
 ---
 A roguelike exploration game featuring a little cat, monsters and mutations.
 
