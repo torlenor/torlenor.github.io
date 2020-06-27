@@ -4,7 +4,7 @@ title:  "Lili's Quest | Week 5"
 date:   2020-06-27 11:45:00 +0200
 categories: "Lili's quest"
 ---
-This week was heavily driven by refactoring. A lot more entity properties got moved into components, which only hold data. Currently the references to these components are still part of the entity, so for now the entity is still more than just an ID as one would usually have in a strict entity-component-system mather of speaking.
+This week was heavily driven by refactoring. A lot more entity properties got moved into components, which only hold data. Currently the references to these components are still part of the entity, so for now the entity is still more than just an ID as one would usually have in a strict entity-component-system sense.
 
 During that refactoring also the parsing of the entity definitions (JSON files) got much easier. Utilizing Go's awesome marshalling/unmarshalling interface the parse functions got shortened and types like MutationEffect now know themselves how to unmarshal from a JSON string into an actually MutationEffect.
 
