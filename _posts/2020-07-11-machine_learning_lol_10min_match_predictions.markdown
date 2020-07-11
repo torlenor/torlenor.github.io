@@ -672,8 +672,6 @@ As can be seen, we are able to reach an accuracy of 70 % with that simple modeli
 
 We used the Riot Games API to fetch match data for approx. 50,000 matches for game version 10.13 5v5 Solo Queue on Summoner's Rift. From the fetched match data we extracted features for the first 10 minutes of the match. Using these features we were able to train a model which can predict the winner of the game to an accuracy of 70%, by just looking at the first 10 minutes of that match.
 
-If you have any 
-
 # Appendix
 
 We will take a look at additional metrics which are part of the match data we fetched. We are especially interested in the win rate based on firsts in the match.
