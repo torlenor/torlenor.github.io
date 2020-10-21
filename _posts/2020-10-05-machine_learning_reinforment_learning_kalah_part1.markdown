@@ -20,7 +20,7 @@ In this article we will first introduce the game Kalah, followed by implementati
 
 # Kalah
 
-Kalah [2] is a two-player game in the mancala family invented by William Julius Champion, Jr. in 1940.
+Kalah [2] is a two-player game in the Mancala family invented by William Julius Champion, Jr. in 1940.
 
 The game is played on a board and with a number of "seeds". The board has a certain number of small pits, called houses, on each side (usually 6, but we will also use 4) and a big pit, called the end zone, at each end. The objective  of the game is to capture more seeds than your opponent.
 
@@ -78,9 +78,9 @@ function minimax(node, depth, maximizingPlayer) is
         return value
 ```
 
-If not otherwise specified, we will use a minimax depth of $D=4$ and the agent will use alpha-beta pruning to speed up the calculations.
+If not otherwise specified, we will use a minimax depth of $D_{max}=4$ and the agent will use alpha-beta pruning to speed up the calculations.
 
-# Reinforcement learning approach
+# Reinforcement learning agents
 
 {:refdef: style="text-align: center;"}
 ![](/assets/img/Reinforcement_learning_diagram.svg.png)
@@ -89,7 +89,7 @@ If not otherwise specified, we will use a minimax depth of $D=4$ and the agent w
 *Figure 2: Reinforcement learning. Courtesy of Wikipedia.*
 {: refdef}
 
-## Reinforce algorithm
+## REINFORCE algorithm
 
 There are many different approaches to reinforcement learning. In our case, we will take, in my opinion, the most straightforward and easy to gasp approach: Policy gradients.
 
@@ -116,36 +116,98 @@ $L=-\sum_tQ_t\ln(\pi(s_t,a_t))$
 
 $s$ is a state, $s'$ is the new state after taking action $a$ and $r$ is the reward obtained at a specific time step.
 
-An example implementation in PyTorch can be found at [https://github.com/pytorch/examples/blob/master/reinforcement_learning/reinforce.py](https://github.com/pytorch/examples/blob/master/reinforcement_learning/reinforce.py), where REINFORCE is used to solve the cart pole example.
+An example implementation in PyTorch can be found at [here](https://github.com/pytorch/examples/blob/master/reinforcement_learning/reinforce.py), where REINFORCE is used to solve the cart pole example.
 
-## Training of the agents
+## Actor-critic algorithm
+
+{:refdef: style="text-align: center;"}
+![](/assets/img/actor_critic.png)
+{: refdef}
+{:refdef: style="text-align: center;"}
+*Figure xx: TODO*
+{: refdef}
+
+An example implementation in PyTorch can be found [here](https://github.com/pytorch/examples/blob/master/reinforcement_learning/actor_critic.py).
+
+# Training of the RL agents
 
 Training the reinforce agent turned out to be tricky.
-- Rewards matter a lot,
-- Random number decisions of the opponent matters a lot
-- Hard to train against RandomAgent
-- Could not find a sweet spot to train on $(6,4)$ or $(6,6)$ boards
-- If a sweet spot is found, a Reinforce agent on $(4,4)$ can beat every other agent except Random
-- It can also happen, that it can beat the agent it trained against, but loses against all the other agents
+- Rewards matter,
+- Random number decisions of the opponent matter
+- Hard to train against RandomAgent, best was against MaxScoreRepeat agent
+- Could not get REINFORCE to converge
+- AC worked well for $(4,4)$, not so much for $(6,4)$ or $(6,6)$ boards
+- AC beats every other agent on $(4,4)$
 
 # Comparison
 
-We are going to compare the classic agents first and afterwards we will run a comparison against our newly implemented and trained reinforce agent.
+<table>
+  <caption>Table 1: Comparison of classic agents on a $(4,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
+  {% for row in site.data.ml.comp_4_4 %}
+    {% if forloop.first %}
+    <tr>
+      {% for pair in row %}
+        <th>{{ pair[0] }}</th>
+      {% endfor %}
+    </tr>
+    {% endif %}
 
-![](/assets/img/agents_comp_4_4.jpg)
-*Figure 2: Comparison of classic agents on a $(4,4)$ board. Shown is the average win percentage of player 1 after playing $N=1000$ games. Note: In this setup there was a relative high percentage of draws.*
+    {% tablerow pair in row %}
+      {{ pair[1] }}
+    {% endtablerow %}
+  {% endfor %}
+</table>
 
-![](/assets/img/agents_comp_6_4.jpg)
-*Figure 3: Comparison of classic agents on a $(4,4)$ board. Shown is the average win percentage of player 1 after playing $N=1000$ games.*
+<table>
+    <caption>Figure 2: Comparison of classic agents on a $(6,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
+  {% for row in site.data.ml.comp_6_4 %}
+    {% if forloop.first %}
+    <tr>
+      {% for pair in row %}
+        <th>{{ pair[0] }}</th>
+      {% endfor %}
+    </tr>
+    {% endif %}
 
-![](/assets/img/agents_comp_6_6.jpg)
-*Figure 4: Comparison of classic agents on a $(6,6)$ board. Shown is the average win percentage of player 1 after playing $N=1000$ games.*
+    {% tablerow pair in row %}
+      {{ pair[1] }}
+    {% endtablerow %}
+  {% endfor %}
+</table>
 
-![](/assets/img/agents_comp_mini_depth6_6_6.jpg)
-*Figure 5: Comparison of minimax agent with a maximum depth of 6 against other classic agents on a $(6,6)$ board. Shown is the average win percentage of player 1 after playing $N=1000$ games.*
+<table>
+  <caption>Figure 3: Comparison of classic agents on a $(6,6)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
+  {% for row in site.data.ml.comp_6_6 %}
+    {% if forloop.first %}
+    <tr>
+      {% for pair in row %}
+        <th>{{ pair[0] }}</th>
+      {% endfor %}
+    </tr>
+    {% endif %}
 
-![](/assets/img/agents_comp_rl_4_4.jpg)
-*Figure 6: Comparison of reinforce RL agent against classic agents on a $(4,4)$ board. Shown is the average win percentage of player 1 after playing $N=1000$ games.*
+    {% tablerow pair in row %}
+      {{ pair[1] }}
+    {% endtablerow %}
+  {% endfor %}
+</table>
+
+<table>
+  <caption>Figure 4: Comparison of classic agents on a $(6,6)$ board were minimax agent uses a maximum depth of $D_{max}=6$. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
+  {% for row in site.data.ml.comp_6_6_mini_depth6 %}
+    {% if forloop.first %}
+    <tr>
+      {% for pair in row %}
+        <th>{{ pair[0] }}</th>
+      {% endfor %}
+    </tr>
+    {% endif %}
+
+    {% tablerow pair in row %}
+      {{ pair[1] }}
+    {% endtablerow %}
+  {% endfor %}
+</table>
 
 # Summary and discussion
 
