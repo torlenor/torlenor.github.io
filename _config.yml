@@ -9,10 +9,16 @@ github_username:  torlenor
 
 # Build settings
 # theme: minima
-theme: jekyll-theme-midnight
-# remote_theme: jekyll/minima
+# theme: jekyll-theme-midnight
+remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
+
+minima:
+  skin: dark
+  social_links:
+    twitter: hpsch
+    github: torlenor
 
 show_downloads: false
 google_analytics: UA-62820693-2
