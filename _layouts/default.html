@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: "en" }}">
 
 <head>
     <meta charset="utf-8">
@@ -24,25 +24,30 @@
       </script>
     {% endif %}
 
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+          }
+        });
+      </script>
+      <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> 
+
 </head>
 
 <body>
 
+  {%- include header.html -%}
+
+  <main class="page-content" aria-label="Content">
     <div class="wrapper">
-
-        <section>
-            <div id="title">
-                <h1><a class="page-link" href="{{ site.url }}">{{ site.title | escape }}</a></h1>
-                <p>{{ site.description }}</p>
-                {% include navigation.html %}
-                <hr>
-            </div>
-
-            {{ content }}
-
-        </section>
-
+      {{ content }}
     </div>
+  </main>
+
+    {%- include footer.html -%}
+
 
 </body>
 

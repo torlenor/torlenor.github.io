@@ -1,3 +1,7 @@
 ---
 ---
-@import "main";
+
+@import "minima/skins/{{ site.minima.skin | default: 'classic' }}";
+@import "minima/initialize";
+
+table { width: 100%; border-collapse: collapse; caption-side: bottom;}

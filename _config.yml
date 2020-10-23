@@ -4,15 +4,20 @@ description: >- # this means to ignore newlines until "baseurl:"
   My private page where I am blogging about my coding adventures.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://torlenor.org" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: hpsch
-github_username:  torlenor
 
 # Build settings
 # theme: minima
-theme: jekyll-theme-midnight
-# remote_theme: jekyll/minima
+# theme: jekyll-theme-midnight
+remote_theme: jekyll/minima
 plugins:
   - jekyll-feed
+
+minima:
+  skin: dark
+  social_links:
+    twitter: hpsch
+    github: torlenor
+    linkedin: hans-peter-schadler-b36511b3
 
 show_downloads: false
 google_analytics: UA-62820693-2
