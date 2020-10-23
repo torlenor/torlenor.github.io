@@ -234,6 +234,8 @@ To see how a larger depth for the minimax algorithm changes things, we did anoth
 
 # Summary and discussion
 
+In this first part of what's, hopefully, going to be a series of posts, we discusses how to play the board game Kalah with classic agents and how reinforcement learning can also be used to successfully play the game and win against the classic agents, at least on small enough game boards. We also found that the training of a reinforcement model tends to be hard and depends on a lot of hyperparameters, including the discount factor, rewards and learning rates and a lot of tuning, i.e., fiddling with the parameters, can be necessary. However, even though we implemented two of the simplest reinforcement algorithms, REINFORCE and actor-critic, it turned out to work quite well and there is still lots of room for improvements to make, which may lead to even better performing RL agents.
+
 # Outlook
 
 The next step will be implementing improved versions of REINFORCE. Especially we want to batch together episodes in the update step which should reduce the variance, i.e., should allow for a much more stable model over training time, and hopefully will lead to an improved performance and an easier trainable model. In addition we will look into improvements to the actor-critic method, especially we will see how advantage actor critic (A2C) and asynchronous advantage actor critic (A3C) models are implemented and how they perform in comparison to our classic agents and to the REINFORCE algorithm. Then it will be important, as training times tend to increase with the increased complexity, that saving and reusing trained models is possible.
