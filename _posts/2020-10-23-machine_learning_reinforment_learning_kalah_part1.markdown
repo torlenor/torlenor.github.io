@@ -232,7 +232,7 @@ To see how a larger depth for the minimax algorithm changes things, we did anoth
   {% endfor %}
 </table>
 
-# Summary and discussion
+# Summary
 
 In this first part of what's, hopefully, going to be a series of posts, we discusses how to play the board game Kalah with classic agents and how reinforcement learning can also be used to successfully play the game and win against the classic agents, at least on small enough game boards. We also found that the training of a reinforcement model tends to be hard and depends on a lot of hyperparameters, including the discount factor, rewards and learning rates and a lot of tuning, i.e., fiddling with the parameters, can be necessary. However, even though we implemented two of the simplest reinforcement algorithms, REINFORCE and actor-critic, it turned out to work quite well and there is still lots of room for improvements to make, which may lead to even better performing RL agents.
 
