@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Tackling the game Kalah using reinforcement learning - Part 1"
-date:   2020-10-02 18:00:00 +0200
+date:   2020-10-23 18:00:00 +0200
 categories: ["Machine Learning", "Reinforcement Learning"]
 ---
 
@@ -98,6 +98,10 @@ If not otherwise specified, we will use a minimax depth of $D_{max}=4$ and the a
 *Figure 2: Reinforcement learning. Courtesy of Wikipedia.*
 {: refdef}
 
+Reinforcement learning (RL) is a branch of machine learning dealing with the maximization of cumulative rewards in a given environment. When talking about RL models running in such an environment one is usually talking about agents, a notion we already introduced in the sections above. Reinforcement learning does not need labelled inputs/outputs. The environment is typically sketched as a Markov decision process (MDP).
+
+Usually the way RL works is shown in Figure 2: An agent takes action in a given environment, the action leads to a reward (positive or negative) and a representation of the state of the environment (in our case the Kalah board). The reward and the state are fed back into the agent model.
+
 ## REINFORCE algorithm
 
 There are many different approaches to reinforcement learning. In our case, we will take, in my opinion, the most straightforward and easy to gasp approach: Policy gradients.
@@ -106,7 +110,7 @@ In the policy gradient method, we are directly trying to find the best policy (s
 
 The algorithm we are going to apply was described in [5] and a good explanation and implementation can be found in [6].
 
-Additionally, a very nice overview over different algorithms, including REINFORE is presented at: [https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce)
+Additionally, a very nice overview over different algorithms, including REINFORCE is presented at: [https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce)
 
 Here we are going to briefly outline the idea behind the algorithm:
 
@@ -136,31 +140,42 @@ An example implementation in PyTorch can be found at [here](https://github.com/p
 *Figure 3: Sketch of the actor-critic model structure.*
 {: refdef}
 
+In case of the actor-critic algorithm [7] a value functions in learned in addition of the policy. This helps reducing the gradient variance. Actor-critic methods consist of two models, which may optionally share parameters:
+
+- The Critic updates the value function $V_\omega$ parameters $\omega$.
+- The Actor updates the policy parameters $\theta$ for $\pi_\theta(s,a)$ in the direction suggested by the critic.
+
 An example implementation in PyTorch can be found [here](https://github.com/pytorch/examples/blob/master/reinforcement_learning/actor_critic.py).
 
 # Training of the RL agents
 
-Training the RL agents turned out to be a challenge. We were not able to get the REINFORCE agent to converge, even after playing 50000 episodes against different types of classical agents. Also changing $\gamma$, learning rate, rewards or trying with different seeds did not lead to a converging REINFORCE algorithm and the win rate stayed always below 40 %. As a positive aspect: It could learn the invalid moves reasonably well.
+Training the RL agents turned out to be a challenge. After tuning $\gamma$, learning rate and rewards we were finally able to get an improving REINFORCE agent with win rates over 80%. Usually the agent had no problem to learn what moves are invalid and it had invalid moves below $5%$, but it had troubles learning a good policy for actually winning games against the classic agents. With the actor-critic agent it was easier to find parameters for which the algorithm converged, at least on $(4,4)$ boards.
 
-With the actor-critic agent it was easier to find parameters for which the algorithm converged, at least on $(4,4)$ boards. There AC worked very well, as we will show later on in the comparison sector, and also changing learning rates, or $\gamma$ only changed the speed of which the algorithm converged. The rewards we used in the end are the following:
+{:refdef: style="text-align: center;"}
+![](/assets/img/ac_4_4_g0.99_s1_solved_98_lr0.001_n512_evalgames200.png)
+{: refdef}
+{:refdef: style="text-align: center;"}
+*Figure 4: Example for the evolution of win rate during training of the actor-critic agent on a $(4,4)$ board.*
+{: refdef}
 
-- Get number seeds placed into own house as rewards minus 0.2 (to make it less favorable to gain no points)
+For the rewards we settled in the end with
+- Get number seeds placed into own house as rewards minus 0.1 (to make it less favorable to gain no points)
 - For a win get +10
 - For a loss get -10
 - For an invalid move get -5 and the game is over
 
-It turned out, that it was hard to train against the random agent. It worked best against the max score and max score and repeat agents. In the end we settled with the Max score and repeat agent for our training.
+It also turned out, that it was hard to train against the random agent. It worked best against the max score and max score and repeat agents. In the end we settled with the max score and repeat agent for our training of the AC and REINFORCE agents.
 
-When training on larger boards $(6,4)$ and $(6,6)$ we could not get the AC algorithm to converge and it was usually stuck at a low win percentage, even after tuning the parameters or after trying with various random seeds.
+Training on larger boards/boards with more seeds, i.e., $(6,4)$ and $(6,6)$, did not lead to a high enough win rate with, neither the AC, nor the REINFORCE agent, even after tuning the parameters or after trying with various random seeds. We may need improvements to the models, which we are going to discuss in the Outlook section.
 
 # Comparison
 
-For the comparison we let every agent play $N=1000$ games against every other agent, including itself, with the exception of the AC agent, as currently it can only play as player 1 (updating the environment, so that it is possible to play as player 2 is part of the planed improvements).
+For the comparison we let every agent play $N=1000$ games against every other agent, including itself, with the exception of the RL agents, as currently it can only play as player 1 (updating the environment, so that it is possible to play as player 2 is part of the planed improvements). Draws are not taken into account when calculating the win rate.
 
-In Table 1 we compare the classic agents against AC on a $(4,4)$ board.
+In Table 1 we compare the classic agents against the RL agents on a $(4,4)$ board. From the classic agents, the random agent performed worst, but a slight advantage for player 1 can be seen there, which may be related to the advantage the player 1 has in Kalah. The max score agent performed already reasonably well with just a few lines of code. It can easily bet random chance and if played against itself also a slight advantage for player 1 is visible. The max score and repeat agent improved the scores even further and is only beaten more often by the minimax agent. The minimax agent clearly is the best classic agent, winning most of the games against the other agents. The reinforcement agents did perform reasonably well themselves. Especially the AC agent was able to outperform the classic agents including the minimax agent.
 
 <table>
-  <caption>Table 1: Comparison of classic agents on a $(4,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
+  <caption>Table 1: Comparison of classic and RL agents on a $(4,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
   {% for row in site.data.ml.comp_4_4 %}
     {% if forloop.first %}
     <tr>
@@ -176,8 +191,10 @@ In Table 1 we compare the classic agents against AC on a $(4,4)$ board.
   {% endfor %}
 </table>
 
+The comparison on the larger board with six bins each side and four seeds in each bin, i.e., $(6,4)$ in our notation, must be done without the RL agents, because, as we discussed in the previous section, we were not able to train a well-performing RL agent for larger boards. However, we are still comparing the classic agents for the larger boards. The biggest difference to the smaller board is that player 1 has a much higher win rate in case of the first three agent types. For minimax it is not so clear and the performance seems to be en-par with the performance on the smaller board, with the exception of the matchup against the max score and repeat agent, where the minimax agent performed worse, but still winning more than half of the games.
+
 <table>
-    <caption>Figure 2: Comparison of classic agents on a $(6,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
+    <caption>Table 2: Comparison of classic agents on a $(6,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
   {% for row in site.data.ml.comp_6_4 %}
     {% if forloop.first %}
     <tr>
@@ -193,26 +210,13 @@ In Table 1 we compare the classic agents against AC on a $(4,4)$ board.
   {% endfor %}
 </table>
 
+On the $(6,6)$ the results, Table 3, look more similar to the $(4,4)$ board again, except for the random agent. The minimax agent was still performing well against the other agents despite the depth of only $D_{max}=4$ which we used.
+
+To see how a larger depth for the minimax algorithm changes things, we did another calculation on a $(6,6)$ board, but this time with $D_{max}=6$. This version of the minimax agent is depicted as "Minimax 6" in Table 3. It drastically increased the calculation time, but did further improve the win percentage of the minimax agent.
+
 <table>
-  <caption>Figure 3: Comparison of classic agents on a $(6,6)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
+  <caption>Table 3: Comparison of classic agents on a $(6,6)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
   {% for row in site.data.ml.comp_6_6 %}
-    {% if forloop.first %}
-    <tr>
-      {% for pair in row %}
-        <th>{{ pair[0] }}</th>
-      {% endfor %}
-    </tr>
-    {% endif %}
-
-    {% tablerow pair in row %}
-      {{ pair[1] }}
-    {% endtablerow %}
-  {% endfor %}
-</table>
-
-<table>
-  <caption>Figure 4: Comparison of classic agents on a $(6,6)$ board were minimax agent uses a maximum depth of $D_{max}=6$. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
-  {% for row in site.data.ml.comp_6_6_mini_depth6 %}
     {% if forloop.first %}
     <tr>
       {% for pair in row %}
@@ -231,11 +235,13 @@ In Table 1 we compare the classic agents against AC on a $(4,4)$ board.
 
 # Outlook
 
-The next step will be implementing improved versions of REINFORCE. Especially we want to batch together episodes in the update step which should improve signal to noise and reduce the variance, i.e., should allow for a much more stable model over training time and hopefully will lead to an improved performance and give us a stable parameter space. In addition we will look into of the Actor-Critic method and its various improvements that have been proposed to it, especially we will see how Advantage Actor Critic (A2C) and Asynchronous Advantage Actor Critic (A3C) are implemented and how they perform in comparison to our classic agents and to the REINFORCE algorithm.
+The next step will be implementing improved versions of REINFORCE. Especially we want to batch together episodes in the update step which should reduce the variance, i.e., should allow for a much more stable model over training time, and hopefully will lead to an improved performance and an easier trainable model. In addition we will look into improvements to the actor-critic method, especially we will see how advantage actor critic (A2C) and asynchronous advantage actor critic (A3C) models are implemented and how they perform in comparison to our classic agents and to the REINFORCE algorithm. Then it will be important, as training times tend to increase with the increased complexity, that saving and reusing trained models is possible.
 
-From the implementation point of view improvements to the environment and to the Kalah board will be made to allow the RL agent to play as a second player. An idea will be to rotate the observation in case of player two so that it appears like the agent would sit in front of the board on its own side. This will be a step towards the exiting topic of playing the RL agent against itself and possible even train it like that.
+For the training process itself, we are considering moving away from training always against one type of classic agent more to a heterogeneous approach were we train against various types of agents, which should hopefully improve the overall performance of the RL agents.
 
-Of course the highest priority will have to cleanup the code so that we can publish it on Github.
+From the implementation point of view improvements to the environment and to the Kalah board will be made to allow the RL agent to play as the second player. Of very high priority is also cleaning up the code so that we can publish it on GitHub. A part of this cleanup will be to refactor the current code base so that it is easier to plot various metrics of the machine learning process and also to make it easier exporting these plots.
+
+A distant goal will also be, to make this implementation more user friendly to use so that a human player can easily play against the implemented agents.
 
 # References
 
@@ -250,3 +256,5 @@ Of course the highest priority will have to cleanup the code so that we can publ
 [5] Williams, Ronald J. "Simple statistical gradient-following algorithms for connectionist reinforcement learning." Reinforcement Learning. Springer, Boston, MA, 1992. 5-32.
 
 [6] Lapan, Maxim. "Deep Reinforcement Learning Hands-On", Second Edition, Packt, Birmingham, UK, 2020, 286-308.
+
+[7] A. Barto, R. Sutton, and C. Anderson, Neuron-like elements that can solve difficult learning control problems, IEEE Transactions on Systems, Man and Cybernetics, 13 (1983), pp. 835–846.

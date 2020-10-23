@@ -1,7 +1,0 @@
-vs,Random,MaxScore,MaxScoreRepeat,Minimax
-Random,48.49,2.42,0.80,1.80
-MaxScore,97.89,50.47,14.08,14.42
-MaxScoreRepeat,99.00,94.52,67.22,42.20
-Minimax,99.40,94.24,82.47,67.43
-Reinforce,N/A,N/A,N/A,N/A
-ActorCritic,N/A,N/A,N/A,N/A
