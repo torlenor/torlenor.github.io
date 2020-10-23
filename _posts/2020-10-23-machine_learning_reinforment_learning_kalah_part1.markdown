@@ -248,18 +248,11 @@ A distant goal will also be to make this implementation more user friendly to us
 
 # References
 
-<a name="r1"></a>[1] [https://en.wikipedia.org/wiki/Reinforcement_learning](https://en.wikipedia.org/wiki/Reinforcement_learning)
-
-<a name="r2"></a>[2] [https://en.wikipedia.org/wiki/Kalah](https://en.wikipedia.org/wiki/Kalah)
-
-<a name="r3"></a>[3] [https://pytorch.org/](https://pytorch.org/)
-
-<a name="r4"></a>[4] [https://en.wikipedia.org/wiki/Minimax](https://en.wikipedia.org/wiki/Minimax)
-
-<a name="r5"></a>[5] [https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
-
-<a name="r6"></a>[6] Williams, Ronald J. "Simple statistical gradient-following algorithms for connectionist reinforcement learning." Reinforcement Learning. Springer, Boston, MA, 1992. 5-32.
-
-<a name="r7"></a>[7] Lapan, Maxim. "Deep Reinforcement Learning Hands-On", Second Edition, Packt, Birmingham, UK, 2020, 286-308.
-
-<a name="r8"></a>[8] A. Barto, R. Sutton, and C. Anderson, Neuron-like elements that can solve difficult learning control problems, IEEE Transactions on Systems, Man and Cybernetics, 13 (1983), pp. 835–846.
+[1]<a name="r1"></a> [https://en.wikipedia.org/wiki/Reinforcement_learning](https://en.wikipedia.org/wiki/Reinforcement_learning)  
+[2]<a name="r2"></a> [https://en.wikipedia.org/wiki/Kalah](https://en.wikipedia.org/wiki/Kalah)  
+[3]<a name="r3"></a> [https://pytorch.org/](https://pytorch.org/)  
+[4]<a name="r4"></a> [https://en.wikipedia.org/wiki/Minimax](https://en.wikipedia.org/wiki/Minimax)  
+[5]<a name="r5"></a> [https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)  
+[6]<a name="r6"></a> Williams, Ronald J. "Simple statistical gradient-following algorithms for connectionist reinforcement learning." Reinforcement Learning. Springer, Boston, MA, 1992. 5-32.  
+[7]<a name="r7"></a> Lapan, Maxim. "Deep Reinforcement Learning Hands-On", Second Edition, Packt, Birmingham, UK, 2020, 286-308.  
+[8]<a name="r8"></a> A. Barto, R. Sutton, and C. Anderson, Neuron-like elements that can solve difficult learning control problems, IEEE Transactions on Systems, Man and Cybernetics, 13 (1983), pp. 835–846.  
