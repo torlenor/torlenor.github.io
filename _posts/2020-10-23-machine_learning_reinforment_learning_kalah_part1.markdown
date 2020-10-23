@@ -57,13 +57,13 @@ Before we start talking about reinforcement learning approaches to playing Kalah
 
 This agent, as the name suggests, will randomly choose a move out of all valid moves. This is the simplest approach we can take on implementing a Kalah playing agent and it can be implemented essentially with just one line of Python code.
 
-## Max score agent
+## MaxScore agent
 
 The idea behind this agent is, that it will always take the move which gives him the highest score. This can either be a move which will let him sow a seed into its own end zone, or, ideally, it will be a move were it can steel the opponents seeds by hitting an empty pit on its own side of the board.
 
-## Max score and repeat agent
+## MaxScoreRepeat agent
 
-The base strategy for this agent is the same as the max score agent. The difference is, that it will prefer a move were it will hit its own end zone with its last seed, meaning that it can get another move. This is implemented in such a way to exploit the possibility of having more than one additional move if the board permits that. This can easily be implemented by always taking a look at the possible moves starting from the left of the board going right and picking the first where a repeating play is possible.
+The base strategy for this agent is the same as the MaxScore agent. The difference is, that it will prefer a move were it will hit its own end zone with its last seed, meaning that it can get another move. This is implemented in such a way to exploit the possibility of having more than one additional move if the board permits that. This can easily be implemented by always taking a look at the possible moves starting from the left of the board going right and picking the first where a repeating play is possible.
 
 ## Minimax agent
 
@@ -165,7 +165,7 @@ For the rewards we settled in the end with
 - For a loss get -10
 - For an invalid move get -5 and the game is over
 
-It also turned out that it was hard to train against the random agent. Training worked best against the max score and max score and repeat agents and in the end we settled with the max score and repeat agent for training of the AC and REINFORCE agents.
+It also turned out that it was hard to train against the random agent. Training worked best against the MaxScore and MaxScoreRepeat agents and in the end we settled with the MaxScoreRepeat agent for training of the AC and REINFORCE agents.
 
 Training on larger boards/boards with more seeds, i.e., $(6,4)$ and $(6,6)$, did not lead to a high enough win rate with, neither the AC, nor the REINFORCE agent, even after tuning the parameters or after trying with various random seeds. We may need improvements to the models, which we are going to discuss in the Outlook section and hopefully we will be able to produce well trained agents for the larger boards, too.
 
@@ -173,7 +173,7 @@ Training on larger boards/boards with more seeds, i.e., $(6,4)$ and $(6,6)$, did
 
 For the comparison we let every agent play $N=1000$ games against every other agent, including itself, with the exception of the RL agents, as currently it can only play as player 1. Updating the environment, so that it is possible to play as player 2 is part of the planed improvements. Draws are not taken into account when calculating the win rate.
 
-In Table 1 we compare the classic agents against the RL agents on a $(4,4)$ board. From the classic agents the random agent performed worst, but a slight advantage for player 1 can be seen there, which may be related to the advantage the player 1 has in Kalah. The max score agent performed already reasonably well with just a few lines of code. It can easily beat random chance and if played against itself also a slight advantage for player 1 is visible. The max score and repeat agent improved the scores even further and is only beaten more often by the minimax agent. The minimax agent clearly is the best classic agent, winning most of the games against the other agents. The reinforcement agents did perform reasonably well themselves. Especially the AC agent was able to outperform the classic agents including the minimax agent.
+In Table 1 we compare the classic agents against the RL agents on a $(4,4)$ board. From the classic agents the random agent performed worst, but a slight advantage for player 1 can be seen there, which may be related to the advantage the player 1 has in Kalah. The MaxScore agent performed already reasonably well with just a few lines of code. It can easily beat random chance and if played against itself also a slight advantage for player 1 is visible. The MaxScoreRepeat agent improved the scores even further and is only beaten more often by the Minimax agent. The Minimax agent clearly is the best classic agent, winning most of the games against the other agents. The reinforcement agents did perform reasonably well themselves. Especially the AC agent was able to outperform the classic agents including the Minimax agent.
 
 <table>
   <caption>Table 1: Comparison of classic and RL agents on a $(4,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
@@ -192,7 +192,7 @@ In Table 1 we compare the classic agents against the RL agents on a $(4,4)$ boar
   {% endfor %}
 </table>
 
-The comparison on the larger board with six bins each side and four seeds in each bin, i.e., $(6,4)$ in our notation, must be done without the RL agents, because, as we discussed in the previous section, we were not able to train a well-performing RL agent for larger boards. However, we are still comparing the classic agents for the larger boards. The biggest difference to the smaller board is that player 1 has a much higher win rate in case of the first three agent types. For minimax it is not so clear and the performance seems to be en-par with the performance on the smaller board, with the exception of the matchup against the max score and repeat agent, where the minimax agent performed worse, but still winning more than half of the games.
+The comparison on the larger board with six bins each side and four seeds in each bin, i.e., $(6,4)$ in our notation, must be done without the RL agents, because, as we discussed in the previous section, we were not able to train a well-performing RL agent for larger boards. However, we are still comparing the classic agents for the larger boards. The biggest difference to the smaller board is that player 1 has a much higher win rate in case of the first three agent types. For minimax it is not so clear and the performance seems to be en-par with the performance on the smaller board, with the exception of the matchup against the MaxScoreRepeat agent, where the Minimax agent performed worse, but still winning more than half of the games.
 
 <table>
     <caption>Table 2: Comparison of classic agents on a $(6,4)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games.</caption>
@@ -211,9 +211,9 @@ The comparison on the larger board with six bins each side and four seeds in eac
   {% endfor %}
 </table>
 
-On the $(6,6)$ the results, Table 3, look more similar to the $(4,4)$ board again, except for the random agent. The minimax agent was still performing well against the other agents despite the depth of only $D_{max}=4$ which we used.
+On the $(6,6)$ the results, Table 3, look more similar to the $(4,4)$ board again, except for the random agent. The Minimax agent was still performing well against the other agents despite the depth of only $D_{max}=4$ which we used.
 
-To see how a larger depth for the minimax algorithm changes things, we did another calculation on a $(6,6)$ board, but this time with $D_{max}=6$. This version of the minimax agent is depicted as "Minimax 6" in Table 3. It drastically increased the calculation time, but did further improve the win percentage of the minimax agent.
+To see how a larger depth for the minimax algorithm changes things, we did another calculation on a $(6,6)$ board, but this time with $D_{max}=6$. This version of the Minimax agent is depicted as "Minimax 6" in Table 3. It drastically increased the calculation time, but did further improve the win percentage of the Minimax agent.
 
 <table>
   <caption>Table 3: Comparison of classic agents on a $(6,6)$ board. Shown is the average win percentage of player 1 (rows) vs. player 2 (columns) after playing $N=1000$ games. Minimax 6 uses a maximum depth of 6 for the minimax algorithm.</caption>
