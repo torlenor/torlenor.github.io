@@ -106,7 +106,7 @@ Usually the way RL works is shown in Figure 2: An agent takes action in a given 
 
 There are many different approaches to reinforcement learning. In our case, we will take, in my opinion, the most straightforward and easy to gasp approach: Policy gradients.
 
-In the policy gradient method, we are directly trying to find the best policy (something which tells us what action to choose in each step of the problem). The algorithm we are going to apply is named REINFORCE and was described in [[6]](#r6) and a good explanation and implementation can be found in [[7]](#r7). Additionally, a very nice overview over different algorithms, including REINFORCE is presented at: [https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce)
+In the policy gradient method, we are directly trying to find the best policy (something which tells us what action to choose in each step of the problem). The algorithm we are going to apply is named REINFORCE and was described in [[6]](#r6) and a good explanation and implementation can be found in [[7]](#r7). Additionally, a good overview of different algorithms, including REINFORCE, is presented at: [https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce)
 
 Here we are going to briefly outline the idea behind the algorithm:
 
