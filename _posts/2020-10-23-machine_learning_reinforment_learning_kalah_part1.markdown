@@ -31,13 +31,13 @@ The game is played on a board and with a number of "seeds". The board has a cert
 *Figure 1: A Kalah board $(6,6)$ in the start configuration.*
 {: refdef}
 
-There are various rule sets available. We will tke the ones which are considered standard. They are summarized in the following:
+There are various rule sets available and we will take the rule set which is considered standard. It is summarized in the following:
 
 1) You start with 4 or 6 (or whatever you agree on) number of seeds in every of the players pits.
 
 2) The players take turns "sowing" their seeds. The current player takes all the seeds from one of its pits and places them, one by one counter-clockwise into each of the following pits, including its own end zone pit, but not in the opponents end zone pit.
 
-3) If the last sown seed lands in an empty house owned by the current player, and if the opposite house contains seeds, all the seeds in the pit were he placed the last seed and the seeds in the opposite pit belongs to the player and shall be placed into its end zone.
+3) If the last sown seed lands in an empty house owned by the current player, and if the opposite house contains seeds, all the seeds in the pit where he placed the last seed and the seeds in the opposite pit belongs to the player and shall be placed into its end zone.
 
 4) If the last sown seed lands in the player's end zone, the player can take an additional move.
 
