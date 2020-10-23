@@ -130,7 +130,7 @@ $$L=-\sum_tQ_t\ln(\pi(s_t,a_t))$$
 
 $s$ is a state, $s'$ is the new state after taking action $a$ and $r$ is the reward obtained at a specific time step.
 
-An example implementation in PyTorch can be found at [here](https://github.com/pytorch/examples/blob/master/reinforcement_learning/reinforce.py), solving the CartPole problem.
+An example implementation in PyTorch can be found [here](https://github.com/pytorch/examples/blob/master/reinforcement_learning/reinforce.py), solving the CartPole problem.
 
 ## Actor-critic algorithm
 
