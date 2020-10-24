@@ -8,15 +8,17 @@ categories: ["Machine Learning", "Reinforcement Learning"]
 * TOC
 {:toc}
 
-In this article series we are going to talk about reinforcement learning (RL) [[1]](#r1), an exciting part of the whole machine learning area and one of the three major parts, besides supervised (see [Predicting the outcome of a League of Legends match]({% post_url 2020-07-11-machine_learning_lol_10min_match_predictions %}) for an example) and unsupervised learning. The idea behind RL is to train a model, usually called an agent, to take actions in an environment so that the cumulative reward over time (must not necessarily mean real time) is maximized. In contrast to supervised learning, in RL the agent is not fed with labels and is not told what is the "correct" move, but the idea is, that the agent learns by itself in the given environment solely by providing an observation and the gained/lost reward after a taken action in the environment.
+In this article series we are going to talk about reinforcement learning (RL) [[1]](#r1), an exciting and one of the three major parts of machine learning, besides supervised (see [Predicting the outcome of a League of Legends match]({% post_url 2020-07-11-machine_learning_lol_10min_match_predictions %}) for an example) and unsupervised learning. The idea behind RL is to train a model, usually called an agent, to take actions in an environment so that the cumulative reward over time, which must not necessarily mean real time, is maximized. In contrast to supervised learning, in RL the agent is not fed with labels and is not told what is the "correct" move, but the idea is, that the agent learns by itself in the given environment solely by providing an observation/state of the environment and the gained/lost reward after a taken action.
 
 Here we will use this approach to tackle the game Kalah [[2]](#r2). To mix things up a little, this time we are going to use PyTorch [[3]](#r3) as our library of choice.
 
-We will show that it is possible to train an RL agent to play better than established, hard-coded approaches to Kalah, if certain parameters are well chosen. We will also give an outlook on improvements to the algorithms and what different approaches we could use.
+We will show that it is possible to train an RL agent to play better than hard-coded approaches. In the last section we will give an outlook on improvements to the algorithms and what other approaches we could use.
 
-# Introductory remarks
+# Introduction
 
-In this article we will first introduce the game Kalah, followed by implementations of classical agents for the game, which serve as a baseline for comparing our machine learning models to it. Afterwards we will present two RL agents, show how to train them and in the end compare them to the classic agents.
+Reinforcement learning (RL) is one of the exiting fields of machine learning (ML) which gained popularity over the last years do to advances in computer performance, algorithms and because of the involvement of big technology companies. The research on learning ATARI games by Google's DeepMind Technologies [[4,5]](#r4) and their subsequent proof that RL can beat humans in go [[6]](#r6), chess and shogi showed that RL can be a powerful tool which will find its way out of toy models into real world applications sooner or later. Even learning complex computer games, like Dota 2 [[7]](#r7) or Starcraft II [[8]](#r8), are no longer just visions, but under certain controlled conditions this is already possible.
+
+Here we will first introduce the game Kalah, followed by implementations of some classic agents for the game, which will serve as our baseline and as a sparing partner for our machine learning models. Afterwards, we will present two simple RL agents for Kalah, show how to train them and compare them to the classic agents. We will show, that it is possible to have simple reinforcement learning models to learn the game Kalah and outperform classic agents, though currently restricted to smaller game boards.
 
 # Kalah
 
@@ -51,11 +53,11 @@ In this article we are going to play with the $(4,4)$, $(6,4)$ and $(6,6)$ varia
 
 # Classic agents
 
-Before we start talking about reinforcement learning approaches to playing Kalah, we will first present a few classic agents which will serve as our baseline in comparison.
+Before we talk about reinforcement learning approaches to playing Kalah, we first present classic agents which will serve as our baseline in the comparisons and which will be used for training. For most of its variations Kalah is a solved game were the first player would win if we would use pre-computed move databases with perfect moves, but we are not going to use them here.
 
 ## Random agent
 
-This agent, as the name suggests, will randomly choose a move out of all valid moves. This is the simplest approach we can take on implementing a Kalah playing agent and it can be implemented essentially with just one line of Python code.
+This agent, as the name suggests, will randomly choose a move out of all valid moves. This is the simplest approach we can take and it can be implemented essentially with just one line of Python code.
 
 ## MaxScore agent
 
@@ -63,11 +65,11 @@ The idea behind this agent is, that it will always take the move which gives him
 
 ## MaxScoreRepeat agent
 
-The base strategy for this agent is the same as the MaxScore agent. The difference is, that it will prefer a move were it will hit its own end zone with its last seed, meaning that it can get another move. This is implemented in such a way to exploit the possibility of having more than one additional move if the board permits that. This can easily be implemented by always taking a look at the possible moves starting from the left of the board going right and picking the first where a repeating play is possible.
+The base strategy for this agent is the same as the MaxScore agent. The difference is, that it will prefer a move were it will hit its own end zone with its last seed, meaning that it can take another move. This is implemented in such a way to exploit the possibility of having more than one additional move if the board permits that. This can easily be implemented by always taking a look at the possible moves starting from the left of the board going right and picking the first where a repeating play is possible.
 
 ## Minimax agent
 
-The minimax algorithm [[4]](#r4) is a very common decision rule in game theory, statistics and many other fields. One tries to minimize the possible loss for a worst case (maximum loss) scenario.
+The minimax algorithm [[9]](#r9) is a very common decision rule in game theory, statistics and many other fields. One tries to minimize the possible loss for a worst case (maximum loss) scenario.
 
 The pseudo code for the algorithm (take from Wikipedia) is given by:
 
@@ -87,7 +89,7 @@ function minimax(node, depth, maximizingPlayer) is
         return value
 ```
 
-If not otherwise specified, we will use a minimax depth of $D_{max}=4$. In addition we implement alpha-beta pruning [[5]](#r5) to speed up the calculations.
+If not otherwise specified, we will use a minimax depth of $D_{max}=4$. In addition we implement alpha-beta pruning [[10]](#r10) to speed up the calculations.
 
 # Reinforcement learning agents
 
@@ -106,7 +108,7 @@ Usually the way RL works is shown in Figure 2: An agent takes action in a given 
 
 There are many different approaches to reinforcement learning. In our case, we will take, in my opinion, the most straightforward and easy to gasp approach: Policy gradients.
 
-In the policy gradient method, we are directly trying to find the best policy (something which tells us what action to choose in each step of the problem). The algorithm we are going to apply is named REINFORCE and was described in [[6]](#r6) and a good explanation and implementation can be found in [[7]](#r7). Additionally, a good overview of different algorithms, including REINFORCE, is presented at: [https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce)
+In the policy gradient method, we are directly trying to find the best policy (something which tells us what action to choose in each step of the problem). The algorithm we are going to apply is named REINFORCE and was described in [[11]](#r11) and a good explanation and implementation can be found in [[12]](#r12). Additionally, a good overview of different algorithms, including REINFORCE, is presented at: [https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce](https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html#reinforce)
 
 Here we are going to briefly outline the idea behind the algorithm:
 
@@ -141,7 +143,7 @@ An example implementation in PyTorch can be found [here](https://github.com/pyto
 *Figure 3: Sketch of the actor-critic model structure.*
 {: refdef}
 
-In case of the actor-critic algorithm [[8]](#r8) a value functions in learned in addition of the policy. This helps reducing the gradient variance. Actor-critic methods consist of two models, which may optionally share parameters:
+In case of the actor-critic algorithm [[13]](#r13) a value functions in learned in addition of the policy. This helps reducing the gradient variance. Actor-critic methods consist of two models, which may optionally share parameters:
 
 - The Critic updates the value function $V_\omega$ parameters $\omega$.
 - The Actor updates the policy parameters $\theta$ for $\pi_\theta(s,a)$ in the direction suggested by the critic.
@@ -251,8 +253,13 @@ A distant goal will also be to make this implementation more user friendly to us
 [1]<a name="r1"></a> [https://en.wikipedia.org/wiki/Reinforcement_learning](https://en.wikipedia.org/wiki/Reinforcement_learning)  
 [2]<a name="r2"></a> [https://en.wikipedia.org/wiki/Kalah](https://en.wikipedia.org/wiki/Kalah)  
 [3]<a name="r3"></a> [https://pytorch.org/](https://pytorch.org/)  
-[4]<a name="r4"></a> [https://en.wikipedia.org/wiki/Minimax](https://en.wikipedia.org/wiki/Minimax)  
-[5]<a name="r5"></a> [https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)  
-[6]<a name="r6"></a> Williams, Ronald J. "Simple statistical gradient-following algorithms for connectionist reinforcement learning." Reinforcement Learning. Springer, Boston, MA, 1992. 5-32.  
-[7]<a name="r7"></a> Lapan, Maxim. "Deep Reinforcement Learning Hands-On", Second Edition, Packt, Birmingham, UK, 2020, 286-308.  
-[8]<a name="r8"></a> A. Barto, R. Sutton, and C. Anderson, Neuron-like elements that can solve difficult learning control problems, IEEE Transactions on Systems, Man and Cybernetics, 13 (1983), pp. 835–846.  
+[4]<a name="r4"></a> Mnih, Volodymyr; Kavukcuoglu, Koray; Silver, David; Graves, Alex; Antonoglou, Ioannis; Wierstra, Daan; Riedmiller, Martin (19 December 2013). "Playing Atari with Deep Reinforcement Learning". arXiv:1312.5602.  
+[5]<a name="r5"></a> Adrià Puigdomènech Badia; Piot, Bilal; Kapturowski, Steven; Sprechmann, Pablo; Vitvitskyi, Alex; Guo, Daniel; Blundell, Charles (30 March 2020). "Agent57: Outperforming the Atari Human Benchmark". arXiv:2003.13350.  
+[6]<a name="r6"></a> Silver, David; Huang, Aja; Maddison, Chris J.; Guez, Arthur; Sifre, Laurent; Driessche, George van den; Schrittwieser, Julian; Antonoglou, Ioannis; Panneershelvam, Veda; Lanctot, Marc; Dieleman, Sander; Grewe, Dominik; Nham, John; Kalchbrenner, Nal; Sutskever, Ilya; Lillicrap, Timothy; Leach, Madeleine; Kavukcuoglu, Koray; Graepel, Thore; Hassabis, Demis (28 January 2016). "Mastering the game of Go with deep neural networks and tree search". Nature. 529 (7587): 484–489. https://doi.org/10.1038/nature16961.  
+[7]<a name="r7"></a> Berner, C., Brockman, G., Chan, B., Cheung, V., Debiak, P., Dennison, C., Farhi, D., Fischer, Q., Hashme, S., Hesse, C., Józefowicz, R., Gray, S., Olsson, C., Pachocki, J.W., Petrov, M., Pinto, H.P., Raiman, J., Salimans, T., Schlatter, J., Schneider, J., Sidor, S., Sutskever, I., Tang, J., Wolski, F., & Zhang, S. (2019). Dota 2 with Large Scale Deep Reinforcement Learning. ArXiv:1912.06680.   
+[8]<a name="r8"></a> Vinyals, O., Babuschkin, I., Czarnecki, W.M. et al. Grandmaster level in StarCraft II using multi-agent reinforcement learning. Nature 575, 350–354 (2019). https://doi.org/10.1038/s41586-019-1724-z   
+[9]<a name="r9"></a> [https://en.wikipedia.org/wiki/Minimax](https://en.wikipedia.org/wiki/Minimax)  
+[10]<a name="r10"></a> [https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)  
+[11]<a name="r11"></a> Williams, Ronald J. "Simple statistical gradient-following algorithms for connectionist reinforcement learning." Reinforcement Learning. Springer, Boston, MA, 1992. 5-32.  
+[12]<a name="r12"></a> Lapan, Maxim. "Deep Reinforcement Learning Hands-On", Second Edition, Packt, Birmingham, UK, 2020, 286-308.  
+[13]<a name="r13"></a> A. Barto, R. Sutton, and C. Anderson, Neuron-like elements that can solve difficult learning control problems, IEEE Transactions on Systems, Man and Cybernetics, 13 (1983), pp. 835–846.  
