@@ -240,7 +240,7 @@ In this first part of what's, hopefully, going to be a series of posts, we discu
 
 # Outlook
 
-The next step will be implementing improved versions of REINFORCE. Especially we want to batch together episodes in the update step which should reduce the variance, i.e., should allow for a much more stable model over training time, and hopefully will lead to an improved performance and an easier trainable model. In addition, we will look into improvements to the actor-critic method. Especially we will see how advantage actor critic (A2C) and asynchronous advantage actor critic (A3C) models are implemented and how they perform in comparison to our current agents.
+The next step will be implementing improved versions of REINFORCE. Especially we want to batch together episodes in the update step which should reduce the variance, i.e., should allow for a much more stable model over training time, and hopefully will lead to an improved performance and an easier trainable model. In addition, we will look into improvements to the actor-critic method. Especially we will see how advantage actor-critic (A2C) and asynchronous advantage actor-critic (A3C) models are implemented and how they perform in comparison to our current agents.
 
 For the training process itself, we are considering moving away from training always against one type of classic agent more to a heterogeneous approach were we train against various types of agents, which should hopefully improve the overall performance of the RL agents.
 
