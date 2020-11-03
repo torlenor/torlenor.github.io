@@ -5,6 +5,8 @@ date:   2020-10-23 10:00:00 +0200
 categories: ["Machine Learning", "Reinforcement Learning"]
 ---
 
+**Update (2020-11-03):** The code is now available on GitHub: [https://github.com/torlenor/kalah](https://github.com/torlenor/kalah)
+
 * TOC
 {:toc}
 
@@ -244,7 +246,7 @@ The next step will be implementing improved versions of REINFORCE. Especially we
 
 For the training process itself we are considering moving away from training always against one type of classic agent more to a heterogeneous approach were we train against various types of agents, which should hopefully improve the overall performance of the RL agents.
 
-From the implementation point of view improvements to the environment and to the Kalah board will be made to allow the RL agent to play as the second player. Of very high priority is also cleaning up the code so that we can publish it on GitHub. A part of this cleanup will be to refactor the current code base so that it is easier to plot various metrics of the machine learning process and also to make it easier exporting these plots. Then it will also be important, as training times tend to increase with the increased complexity, that saving and reusing trained models is easily possible.
+From the implementation point of view improvements to the environment and to the Kalah board will be made to allow the RL agent to play as the second player. We should also refactor the current code base so that it is easier to plot various metrics of the machine learning process and also to make it easier exporting these plots.
 
 A distant goal will also be to make this implementation more user friendly so that a human player can easily play against the agents, or even better, a graphical/web interface....
 
