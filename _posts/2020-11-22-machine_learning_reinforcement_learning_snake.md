@@ -29,7 +29,7 @@ The gameplay is simple: The player controls a dot, square, or something similar 
 
 The game can easily be implemented in a few lines of Python code and when you throw in a couple more, you can even make a simple visualization in PySDL2. Therefore, we implemented the game ourselves, as relying on other implementations or looking into using them, may have taken more time than just doing it ourselves. And: It's a fun little project to code.
 
-We modified the traditional behavior of an automatically moving snake to a snake, which only moves one step when it gets the next action. This may make it boring if you are playing it as a human, but it is saves ur boilerplate code to discretize the game output into separate observations again. We believe, that the agent is fast enough to handle also that time constraint, if you should really want to use it in the self-moving game.
+We modified the traditional behavior of an automatically moving snake to a snake, which only moves one step when it gets the next action. This may make it boring if you are playing as a human, but it saves boilerplate code to discretize the game output into separate observations again. We believe, that the agent is fast enough to handle also that time constraint, if you should really want to use it in the self-moving game.
 
 In our implementation always one piece of food is placed randomly onto an empty field of the game. The initial length of the snake is one tile, therefore, the maximum score for a given game field size of $N_x$ x $N_y$ is $N_xN_y - 1$.
 
@@ -71,7 +71,7 @@ which worked reasonably well.
 
 # Training of the agent
 
-After a bit of experimentation, we decided on a model with one hidden layer and 512 neurons. We were able to use a learning rate of 1-e3 thorough the whole training without running into instabilities. The discount factor was set to $\gamma=0.995$. Usually we stopped playing an episode when the agent reached 200 steps. Then the episode would end without negative reward.
+After a bit of experimentation, we decided on a model with one hidden layer and 512 neurons. We were able to use a learning rate of $1e-3$ through the whole training without running into instabilities. The discount factor was set to $\gamma=0.995$. Usually we stopped playing an episode when the agent reached 200 steps. Then the episode would end without negative reward.
 
 We trained the model in four phases: In the first run, we used a 4x4 field and ran for 100k episodes to see if the agent is improving. Next we continued training on the same field size for additional 500k episodes. Then we switched to a larger game field of 8x8 and trained for another 500k episodes. In the final training phase we increased the number of maximal steps for each episode to 400 and increased the field size to 10x10.
 
