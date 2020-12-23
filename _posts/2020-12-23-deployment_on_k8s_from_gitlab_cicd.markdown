@@ -5,7 +5,7 @@ date:   2020-12-23 12:00:00 +0100
 categories: ["Linux", "k8s", "DevOps"]
 ---
 
-To speed up the development process for a new project, we were investigating the possibility to integrating our Kubernetes (k8s) cluster into our GitLab instance. It turned out, that all of the examples and tutorials we could find were either way to complicated (examples repos, Medium articles), or not helpful at all because the omitted crucial parts (the GitLab documentation on deployment). So we decided to write an up-to-date tutorial.
+To speed up the development process for a new project, we were investigating the possibility to integrating our Kubernetes (k8s) cluster into our GitLab instance. It turned out, that all of the examples and tutorials we found were either way to complicated (examples repos, Medium articles), or not helpful at all because they omitted crucial parts (the GitLab documentation on deployment). So we decided to write an up-to-date tutorial.
 
 This tutorial will cover how to integrate a running k8s cluster into GitLab (as a cluster not managed by GitLab), how to install the runner and, most importantly, how to write a `.gitlab-ci.yml` file which builds a Docker image, pushes it into the GitLab Container registry and does the deployment. What we will not cover, is the installation of the cluster or of the GitLab instance.
 
