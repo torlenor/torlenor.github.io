@@ -164,6 +164,35 @@ The second part is the deployment part. We are using the bitnami/kubectl image w
 
 Feel free to omit the second script line or increase the timeout. It is a useful command to make sure the pipeline fails when the deployment fails. If you are using a lot of replicas, large images or other settings which would make the rollout much slower, you will have to increase the timeout or the pipeline step will fail.
 
+# Running the pipeline
+
+When you push something to the project repository, the first part, creating the Docker image, will always run. The second part, the deployment is marked as manual, i.e., it has to be triggered by hand via GitLab (Fig. 1). This is useful for production deployments. For testing you could automatically deploy, if you want.
+
+{:refdef: style="text-align: center;"}
+![](/assets/img/gitlab_k8s/pipeline_1.png)
+{: refdef}
+{:refdef: style="text-align: center;"}
+*Figure 1: Finished first step of the pipeline, building the Docker image.*
+{: refdef}
+
+To start the deployment click on the Play symbol on the right hand side and then select the stage you want to run. In our case this is "deployment_production" (see Fig. 2). This will start the deployment on the cluster.
+
+{:refdef: style="text-align: center;"}
+![](/assets/img/gitlab_k8s/pipeline_2.png)
+{: refdef}
+{:refdef: style="text-align: center;"}
+*Figure 2: Starting the deployment.*
+{: refdef}
+
+The output of the job should look similar to the output in the following image (Fig. 3).
+
+{:refdef: style="text-align: center;"}
+![](/assets/img/gitlab_k8s/pipeline_3.png)
+{: refdef}
+{:refdef: style="text-align: center;"}
+*Figure 3: Deployment job output.*
+{: refdef}
+
 # Summary
 
 We have shown how to integrate an existing k8s cluster into GitLab and how to use it for building and deploying an application. In contrast to many believes, this is much easier than doing it, for example, on a bare metal Docker installation. K8s already has a lot of advantages and together with GitLab it becomes very simple to automate deployments and build complete CI/CD pipelines.
