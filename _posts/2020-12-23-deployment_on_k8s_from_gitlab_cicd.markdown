@@ -175,7 +175,7 @@ When you push something to the project repository, the first part, creating the 
 *Figure 1: Finished first step of the pipeline, building the Docker image.*
 {: refdef}
 
-To start the deployment click on the Play symbol on the right hand side and then select the stage you want to run. In our case this is "deployment_production" (see Fig. 2). This will start the deployment on the cluster.
+To start the deployment click on the Play symbol on the right hand side and then select the stage you want to run. In our case this is "deploy_production" (see Fig. 2). This will start the deployment on the cluster.
 
 {:refdef: style="text-align: center;"}
 ![](/assets/img/gitlab_k8s/pipeline_2.png)
