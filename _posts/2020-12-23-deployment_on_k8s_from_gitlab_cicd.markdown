@@ -47,24 +47,24 @@ The following steps assume you are suing GitLab 13.6 or 13.7.
     Copy the whole output (inculding the --- lines) and past it into the **CA Certificate** field.
 10. Now we have to create a service account for GitLab on the cluster. Create a file *gitlab-admin-service-account.yaml* with the following contents:
     ```yaml
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-    name: gitlab
-    namespace: kube-system
-    ---
-    apiVersion: rbac.authorization.k8s.io/v1beta1
-    kind: ClusterRoleBinding
-    metadata:
-    name: gitlab-admin
-    roleRef:
-    apiGroup: rbac.authorization.k8s.io
-    kind: ClusterRole
-    name: cluster-admin
-    subjects:
-    - kind: ServiceAccount
-        name: gitlab
-        namespace: kube-system
+  apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+  name: gitlab
+  namespace: kube-system
+  ---
+  apiVersion: rbac.authorization.k8s.io/v1beta1
+  kind: ClusterRoleBinding
+  metadata:
+  name: gitlab-admin
+  roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+  subjects:
+  - kind: ServiceAccount
+      name: gitlab
+      namespace: kube-system
     ```
     and type
     ```bash
