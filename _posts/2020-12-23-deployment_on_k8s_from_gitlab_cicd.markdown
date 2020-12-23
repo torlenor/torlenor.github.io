@@ -44,7 +44,7 @@ The following steps assume you are suing GitLab 13.6 or 13.7.
     A LOT OF CHARACTERS
     -----END CERTIFICATE-----
     ```
-    Copy the whole output (inculding the --- lines) and past it into the **CA Certificate** field.
+    Copy the whole output (including the "---" lines) and past it into the **CA Certificate** field.
 10. Now we have to create a service account for GitLab on the cluster. Create a file *gitlab-admin-service-account.yaml* with the following contents:
     ```yaml
   apiVersion: v1
@@ -65,7 +65,7 @@ The following steps assume you are suing GitLab 13.6 or 13.7.
   - kind: ServiceAccount
       name: gitlab
       namespace: kube-system
-    ```
+  ```
     and type
     ```bash
     kubectl apply -f gitlab-admin-service-account.yaml
@@ -89,11 +89,11 @@ This step is easy: Go to **Admin Area** - **Kubernetes** and click on your clust
 
 # Writing a GitLab CI/CD configuration for deployment on the k8s cluster
 
-For the next step you need an example project which you can pack into a Docker image and deploy on your cluster. Because we want to manage our deployments and yaml files for k8s in a separate repository, We usually create the deployment for the application once by hand and the use GitLab to modify the deployment to roll out the newest version of the application.
+For the next step you need an example project which you can pack into a Docker image and deploy on your cluster. Because we want to manage our deployments and yaml files for k8s in a separate repository, We usually create the deployment for the application once by hand and use GitLab to modify the deployment to roll out the newest version of the application.
 
 ## Creating the initial deployment from a yaml file
 
-The following snipped is a deployment declaration for a simple, generic application. We omitted all the additional things you may need, like service or ingress, because this would be beyond the scope of this article.
+The following snippet is a deployment declaration for a simple, generic application. We omitted all the additional things you may need, like service or ingress, because this would be beyond the scope of this article.
 
 ```yaml
 apiVersion: apps/v1
