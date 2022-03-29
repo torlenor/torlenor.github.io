@@ -139,6 +139,10 @@ impl LinearRegression {
                 .mul(y_values),
         );
     }
+    pub fn coef(&self) -> &Option<DVector<f64>> {
+        // TODO: Do not return 0th entry if fit_intercept is active
+        return &self.w;
+    }
     pub fn intercept(&self) -> Result<f64, String> {
         if !self.w.is_some() {
             return Err("Model was not fitted".to_string());
