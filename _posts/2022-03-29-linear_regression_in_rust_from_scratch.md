@@ -27,7 +27,7 @@ It is much easier to work with these equations if one writes them in matrix form
 
 $$ \mathbf{y} = X\boldsymbol\beta + \boldsymbol\varepsilon \, ,$$
 
-where all the $n$ equations are squashed together. As we will see below, this notation is useful for deriving our method of determining the parameters $\boldsymbol\beta$. Note: Here we integrated the $\beta_0$ in the $\boldsymbol\beta$ and therefore $\boldsymbol\beta$ is now a $(p+1)$-dimensional vector and $\mathbf{x}$ is now a (n, p+1)-dimensional matrix, where we include a constant first column, i.e., $x_{i0}=1$ for $i = 1, \ldots, n$.
+where all the $n$ equations are squashed together. As we will see below, this notation is useful for deriving our method of determining the parameters $\boldsymbol\beta$. Note: Here we integrated the $\beta_0$ in the $\boldsymbol\beta$ and therefore $\boldsymbol\beta$ is now a $(p+1)$-dimensional vector and $\mathbf{X}$ is now a (n, p+1)-dimensional matrix, where we include a constant first column, i.e., $x_{i0}=1$ for $i = 1, \ldots, n$.
 
 The goal is to get values for all the $\boldsymbol\beta$ fulfilling the equation above.
 
@@ -37,9 +37,9 @@ Ordinary least squares (OLS) [[2]](#r2) is, as the name suggests, a least square
 
 For the linear case the minimization problem possesses a unique global minimum and its solution can be expressed by an explicit formula for the coefficients $\boldsymbol\beta$:
 
-$$ \boldsymbol\beta = (\mathbf{x}^\mathbf{T}\mathbf{x})^{-1}\mathbf{y} $$
+$$ \boldsymbol\beta = (\mathbf{X}^\mathbf{T}\mathbf{X})^{-1}\mathbf{X}^\mathbf{T}\mathbf{y} $$
 
-As we can see here, we have to calculate a matrix inverse and we have to make some assumptions on the input values to guarantee that the solution exists and the matrix is invertible. One of these assumptions is, for example, that the column vectors in $\mathbf{x}$ are linearly independent.
+As we can see here, we have to calculate a matrix inverse and we have to make some assumptions on the input values to guarantee that the solution exists and the matrix is invertible. One of these assumptions is, for example, that the column vectors in $\mathbf{X}$ are linearly independent.
 
 If you are interested in the derivation of this solution, please take a look at the linked Wikipedia page or any good statistics book.
 
