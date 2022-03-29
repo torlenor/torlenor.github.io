@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Ordinary least squares linear regression in Rust"
-date:       2022-03-29 18:325:00 +0200
+date:       2022-03-29 18:25:00 +0200
 categories: ["Machine Learning", "Rust"]
 ---
 
