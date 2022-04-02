@@ -10,7 +10,7 @@ categories: ["Machine Learning", "Rust"]
 
 # Introduction
 
-In contrast to the widespread use of Python and common machine learning packages like scikit-learn [[1]](#r1), there is an advantage in doing things from scratch. For example, learning how things work gives you an advantage in choosing the right algorithms for the job later down the line. We will start doing that with the most simple machine learning algorithm and maybe the most commonly used one: linear regression. In this article we are going to implement the so called ordinary least squares (OLS) [[2]](#r2) linear regression [[3]](#r3) in Rust [[4]](#r4). We will show that with just a few lines of code it is possible to implement this algorithm from scratch. We will then work through an example and compare it with known results. During this work we will gain a better understanding of the concept behind the algorithm and we learn about the Rust package called nalgebra [[5]](#r5), which will help us with our linear algebra needs.
+In contrast to the widespread use of Python and common machine learning packages like scikit-learn [[1]](#r1), there is an advantage in doing things from scratch. For example, learning how things work gives you an advantage in choosing the right algorithms for the job later down the line. We will start doing that with the simplest machine learning algorithm and maybe the most commonly used one: linear regression. In this article we are going to implement the so called ordinary least squares (OLS) [[2]](#r2) linear regression [[3]](#r3) in Rust [[4]](#r4). We will show that with just a few lines of code it is possible to implement this algorithm from scratch. We will then work through an example and compare it with known results. During this work we will gain a better understanding of the concept behind the algorithm and we learn about the Rust package called nalgebra [[5]](#r5), which will help us with our linear algebra needs.
 
 # Linear Regression
 
@@ -45,7 +45,7 @@ If you are interested in the derivation of this solution, please take a look at 
 
 # Implementation in Rust
 
-Now we finally are at the point where we can start implementing the algorithm. As it is basically given by some matrix/vector multiplications and inversions, we have two choices: either we implement the matrix/vector options ourselves or we use a library. As I want to focus more on the algorithm implementations, I chose to use a library (nalgebra [[5]](#r5))
+Finally, we are at the point where we can start implementing the algorithm. As it is basically given by some matrix/vector multiplications and inversions, we have two choices: either we implement the matrix/vector options ourselves or we use a library. As I want to focus on the algorithm implementation, I chose to use a library (nalgebra [[5]](#r5)).
 
 Before we start, we need to bring in the nalgebra functions that we are going to use
 ```rust
