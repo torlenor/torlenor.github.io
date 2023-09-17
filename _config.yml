@@ -15,9 +15,9 @@ plugins:
 minima:
   skin: dark
   social_links:
-    twitter: hpsch
-    github: torlenor
-    linkedin: hans-peter-schadler-b36511b3
+    - { platform: twitter, user_url: "https://twitter.com/hpsch" }
+    - { platform: github,  user_url: "https://github.com/torlenor" }
+    - { platform: linkedin, user_url: "https://www.linkedin.com/in/hans-peter-schadler/" }
 
 show_downloads: false
 google_analytics: UA-62820693-2
