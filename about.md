@@ -8,5 +8,5 @@ My private page where I am blogging about my coding adventures. If you want to c
 
 | Github | [Link](https://github.com/torlenor) |
 | Email | hps \<at\> abyle.org |
-| Twitter | [@hpsch](https://twitter.com/hpsch) |
+| Bluesky | [@torlenor](https://bsky.app/profile/torlenor.org) |
 | LinkedIn | [Link](https://www.linkedin.com/in/hans-peter-schadler-b36511b3/) |
