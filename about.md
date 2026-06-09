@@ -10,3 +10,5 @@ My private page where I am blogging about my coding adventures. If you want to c
 | Email | hps \<at\> abyle.org |
 | Bluesky | [@torlenor](https://bsky.app/profile/torlenor.org) |
 | LinkedIn | [Link](https://www.linkedin.com/in/hans-peter-schadler-b36511b3/) |
+| Business | [AI Engineering Mentor](https://hpschadler.at) |
+| Business | [Chirm](https://chirm.app) |
