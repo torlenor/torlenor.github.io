@@ -19,7 +19,6 @@ minima:
     - { platform: linkedin, user_url: "https://www.linkedin.com/in/hans-peter-schadler/" }
 
 show_downloads: false
-google_analytics: UA-62820693-2
 
 github:
   repository_url:
